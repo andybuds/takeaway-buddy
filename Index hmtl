@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takeaway Buddy</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #e63946;
+            --text-color: #f1f1f1;
+            --text-secondary: #aaaaaa;
+            --border-color: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 16px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        header {
+            text-align: center;
+            padding: 12px 0 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        h1 { color: var(--accent-color); margin: 0 0 4px 0; font-size: 1.8rem; }
+        .subtitle { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 6px;
+        }
+        .tab-btn {
+            background: #2a2a2a;
+            color: #ccc;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+
+        .recipe-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .recipe-img-banner {
+            width: 100%;
+            height: 140px;
+            background-color: #2a2a2a;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            box-sizing: border-box;
+            background-image: linear-gradient(to top, rgba(18,18,18,0.9), rgba(18,18,18,0.1));
+        }
+        .recipe-img-banner span {
+            background: rgba(0,0,0,0.7);
+            color: #ffb703;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .recipe-content-pad {
+            padding: 14px;
+        }
+        .recipe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .recipe-title { font-size: 1.05rem; font-weight: bold; color: #fff; margin: 0; }
+        .toggle-icon { font-size: 1.1rem; color: var(--accent-color); font-weight: bold; transition: transform 0.2s; }
+        
+        .recipe-body {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #2a2a2a;
+            display: none;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-secondary);
+        }
+        .recipe-body strong { color: var(--text-color); }
+        .recipe-card.open .recipe-body { display: block; }
+        .recipe-card.open .toggle-icon { transform: rotate(180deg); }
+
+        .badge-container { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0 0; }
+        .badge {
+            background: #e6394622;
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+        }
+
+        .checklist { list-style: none; padding: 0; margin: 10px 0; }
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #252525;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.88rem;
+        }
+        .checklist input[type="checkbox"] { accent-color: var(--accent-color); width: 20px; height: 20px; cursor: pointer; }
+
+        .guide-box {
+            background: #1a2421;
+            border-left: 4px solid #2ec4b6;
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .guide-box h3 { color: #2ec4b6; margin-top: 0; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Takeaway Buddy</h1>
+        <p class="subtitle">Chinese, Indian, Noodles & Electric Hob Masterclass</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab(0)">Top 10 Chinese</button>
+        <button class="tab-btn" onclick="switchTab(1)">Top 10 Indian</button>
+        <button class="tab-btn" onclick="switchTab(2)">Top 10 Rice & Noodles</button>
+        <button class="tab-btn" onclick="switchTab(3)">Ingredients & Ballymount</button>
+        <button class="tab-btn" onclick="switchTab(4)">Electric Hob Strategy</button>
+    </div>
+
+    <!-- VIEW 0: TOP 10 CHINESE CLASSICS -->
+    <div id="view-0" class="view-section active">
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80');"><span>📷 Classic Irish Takeaway</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">1. The Spice Bag</h3><div class="badge-container"><span class="badge">Chicken, Beef, Pork, Lamb, Prawns</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, Beef, Pork, Lamb, or King Prawns[span_0](start_span)[span_0](end_span).</p><p><strong>Method:</strong> Crispy seasoned meat and golden chips tossed in a blazingly hot wok with peppers, onions, chillies, and house spice salt (5-spice, Sichuan pepper, garlic powder, salt, white pepper, MSG)[span_1](start_span)[span_1](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80');"><span>📷 Rich Peanut Satay</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">2. Takeaway Satay Sauce Stir-Fry</h3><div class="badge-container"><span class="badge">Peanut & Coconut</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, Beef, Pork, Lamb, or King Prawns[span_2](start_span)[span_2](end_span).</p><p><strong>Method:</strong> Rich peanut satay sauce wok-tossed with onions, bell peppers, bamboo shoots, pineapple chunks, and your choice of protein[span_3](start_span)[span_3](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80');"><span>📷 Sticky Glaze</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">3. Shredded Honey Chilli</h3><div class="badge-container"><span class="badge">Sticky Glaze</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Beef, Chicken, Pork, Lamb, or King Prawns[span_4](start_span)[span_4](end_span).</p><p><strong>Method:</strong> Crispy meat strips coated in egg white and cornflour, tossed with honey, dark soy, sweet chilli, garlic, Chinkiang vinegar, and chillies[span_5](start_span)[span_5](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80');"><span>📷 Goldfish Gravy</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">4. Takeaway Curry (3-in-1 / 4-in-1)</h3><div class="badge-container"><span class="badge">Goldfish Curry Paste</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, Beef, Pork, Lamb, or King Prawns[span_6](start_span)[span_6](end_span).</p><p><strong>Method:</strong> Spanish onions and garden peas simmered in signature Goldfish curry gravy, served over chips and fried rice[span_7](start_span)[span_7](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80');"><span>📷 Sichuan Heat</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">5. Szechuan / Firecracker</h3><div class="badge-container"><span class="badge">Toban Djan & Chilli Crisp</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Beef, Chicken, Pork, Lamb, or King Prawns[span_8](start_span)[span_8](end_span).</p><p><strong>Method:</strong> High-heat stir-fry with bell peppers, onions, fresh chillies, garlic, Sichuan peppercorns, Toban Djan, and Lao Gan Ma[span_9](start_span)[span_9](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80');"><span>📷 Fermented Black Bean</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">6. Black Bean Sauce Stir-Fry</h3><div class="badge-container"><span class="badge">Fermented Black Beans</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Beef, Chicken, King Prawns, Pork, or Lamb[span_10](start_span)[span_10](end_span).</p><p><strong>Method:</strong> Fermented salted black beans mashed with garlic and ginger, stir-fried with peppers, onions, light soy, oyster sauce, and Shaoxing wine[span_11](start_span)[span_11](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=600&q=80');"><span>📷 Roasted Peanuts</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">7. Kung Po Stir-Fry</h3><div class="badge-container"><span class="badge">Roasted Peanuts</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, King Prawns, Beef, Pork, or Lamb[span_12](start_span)[span_12](end_span).</p><p><strong>Method:</strong> Sautéed with whole dried red chillies, garlic, dark soy, Chinkiang black vinegar, sugar, scallions, and toasted peanuts[span_13](start_span)[span_13](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80');"><span>📷 Salt & Chilli Crunch</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">8. Salt & Chilli Wok-Tossed</h3><div class="badge-container"><span class="badge">Dry Garlic Crunch</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> King Prawns, Chicken, Pork Belly, Beef, or Lamb[span_14](start_span)[span_14](end_span).</p><p><strong>Method:</strong> Starch-dusted protein fried crispy, tossed dry on max heat with diced red chillies, minced garlic, scallions, and Sichuan pepper salt[span_15](start_span)[span_15](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=600&q=80');"><span>📷 Hong Kong Style</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">9. Sweet & Sour (Hong Kong Style)</h3><div class="badge-container"><span class="badge">Battered & Glossy</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, Pork, King Prawns, Beef, or Lamb[span_16](start_span)[span_16](end_span).</p><p><strong>Method:</strong> Battered protein chunks tossed with pineapple, onion, and peppers in sweet and sour sauce[span_17](start_span)[span_17](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80');"><span>📷 Cracked Pepper</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">10. Black Pepper Sauce Stir-Fry</h3><div class="badge-container"><span class="badge">Cracked Pepper</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Beef, Chicken, Lamb, Pork, or King Prawns[span_18](start_span)[span_18](end_span).</p><p><strong>Method:</strong> Coarsely cracked black peppercorns bloomed in hot garlic oil, stir-fried with onions, bell peppers, Shaoxing wine, and dark soy gravy[span_19](start_span)[span_19](end_span).</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 1: TOP 10 INDIAN CURRIES -->
+    <div id="view-1" class="view-section">
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80');"><span>📷 Tikka Masala</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">1. Chicken Tikka Masala</h3><div class="badge-container"><span class="badge">Tomato Cream & Butter</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, Lamb, King Prawns, Beef, or Pork[span_20](start_span)[span_20](end_span).</p><p><strong>Method:</strong> Seared marinated protein simmered in rich tomato passata, double cream, butter, garlic-ginger, cumin, coriander, and garam masala[span_21](start_span)[span_21](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=600&q=80');"><span>📷 Creamy Korma</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">2. Creamy Korma</h3><div class="badge-container"><span class="badge">Coconut & Almonds</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, King Prawns, Lamb, Beef, or Pork[span_22](start_span)[span_22](end_span).</p><p><strong>Method:</strong> Gently simmered in coconut milk, ground almonds, butter, single cream, cardamom, and subtle warming aromatics[span_23](start_span)[span_23](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80');"><span>📷 Balti Gravy</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">3. Takeaway Balti</h3><div class="badge-container"><span class="badge">Flat Pan Gravy</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Lamb, Chicken, Beef, King Prawns, or Pork[span_24](start_span)[span_24](end_span).</p><p><strong>Method:</strong> High-heat stir-fry in flat pan with Spanish onions, bell peppers, fresh coriander, ginger, garlic, and Balti spices[span_25](start_span)[span_25](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=600&q=80');"><span>📷 Madras Heat</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">4. Madras</h3><div class="badge-container"><span class="badge">Hot & Tangy Lemon</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Lamb, Beef, Chicken, King Prawns, or Pork[span_26](start_span)[span_26](end_span).</p><p><strong>Method:</strong> Fiery South Indian curry with extra red chilli powder, cumin, mustard seeds, curry leaves, tomato purée, and fresh lemon juice[span_27](start_span)[span_27](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80');"><span>📷 Jalfrezi Chillies</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">5. Jalfrezi</h3><div class="badge-container"><span class="badge">Green Chillies & Veg</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, King Prawns, Beef, Lamb, or Pork[span_28](start_span)[span_28](end_span).</p><p><strong>Method:</strong> Thick, semi-dry tomato gravy stir-fried with chunky green peppers, sliced onions, fresh green chillies, garlic, ginger, and turmeric[span_29](start_span)[span_29](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80');"><span>📷 Rogan Josh</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">6. Rogan Josh</h3><div class="badge-container"><span class="badge">Kashmiri Chilli</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Lamb, Beef, Chicken, Pork, or King Prawns[span_30](start_span)[span_30](end_span).</p><p><strong>Method:</strong> Rich onion gravy infused with vibrant red Kashmiri chilli powder, yoghurt, ground fennel seeds, cardamom, and cinnamon[span_31](start_span)[span_31](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=600&q=80');"><span>📷 Butter Chicken</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">7. Butter Chicken (Murgh Makhani)</h3><div class="badge-container"><span class="badge">Kasuri Methi</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken, King Prawns, Lamb, Beef, or Pork[span_32](start_span)[span_32](end_span).</p><p><strong>Method:</strong> Cooked with abundant butter, cream, smooth tomato purée, honey, and crushed Kasuri Methi (dried fenugreek leaves)[span_33](start_span)[span_33](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80');"><span>📷 Bhuna Masala</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">8. Bhuna</h3><div class="badge-container"><span class="badge">Reduced Thick Sauce</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Lamb, Beef, Chicken, Pork, or King Prawns[span_34](start_span)[span_34](end_span).</p><p><strong>Method:</strong> Onions, garlic, ginger, and whole spices cooked down heavily until dark and fragrant, creating a concentrated masala gravy[span_35](start_span)[span_35](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80');"><span>📷 Vindaloo Fire</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">9. Vindaloo</h3><div class="badge-container"><span class="badge">Vinegar & Extra Spice</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Pork, Beef, Lamb, Chicken, or King Prawns[span_36](start_span)[span_36](end_span).</p><p><strong>Method:</strong> Fiery Goan style curry marinated with malt/white vinegar, heavy garlic paste, red chilli powder, peppercorns, cumin, and potatoes[span_37](start_span)[span_37](end_span).</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80');"><span>📷 Naan Fusion Box</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">10. Indian Spice Box / Munch Box</h3><div class="badge-container"><span class="badge">Naan & Tikka Fusion</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p><strong>Protein Options:</strong> Chicken Tikka, Lamb, Beef, Pork, or King Prawns[span_38](start_span)[span_38](end_span).</p><p><strong>Method:</strong> Folded garlic naan loaded with masala-dusted chips, spiced meat, grilled onions, peppers, mint yoghurt, and tamarind chutney[span_39](start_span)[span_39](end_span).</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 2: TOP 10 RICE & NOODLES -->
+    <div id="view-2" class="view-section">
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80');"><span>📷 Egg Fried Rice</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">1. Takeaway Egg Fried Rice</h3><div class="badge-container"><span class="badge">Cold Jasmine Rice</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Cold day-old Jasmine rice wok-fried on max heat with beaten egg, light soy sauce, white pepper, MSG, sesame oil, and fine scallions. Add chicken, beef, pork, lamb, or prawns.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80');"><span>📷 Yeung Chow Combo</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">2. Yeung Chow / Special Fried Rice</h3><div class="badge-container"><span class="badge">House Combo</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>High-heat egg fried rice tossed with light soy, white pepper, MSG, garden peas, Char Siu pork, king prawns, and shredded chicken.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80');"><span>📷 Soft Chow Mein</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">3. Irish Soft Chow Mein</h3><div class="badge-container"><span class="badge">Soft Egg Noodles</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Fresh medium egg noodles blanched and wok-tossed with bean sprouts, sliced onions, scallions, light soy, dark soy, oyster sauce, MSG, and choice of protein.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=600&q=80');"><span>📷 Crispy Noodle Nest</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">4. Cantonese Crispy Chow Mein</h3><div class="badge-container"><span class="badge">Crispy Noodle Base</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Thin egg noodles pan-fried into a crispy nest, topped with wok-fried velveted meat, pak choi, bamboo shoots, and glossy savory brown gravy.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1555126634-323283e090fa?auto=format&fit=crop&w=600&q=80');"><span>📷 Singapore Vermicelli</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">5. Singapore Rice Vermicelli</h3><div class="badge-container"><span class="badge">Curry Powder</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Ultra-thin rice vermicelli noodles wok-fried with Madras curry powder, egg ribbons, bean sprouts, sliced onions, peppers, and chillies.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80');"><span>📷 Beef Ho Fun</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">6. Beef Ho Fun (Flat Rice Noodles)</h3><div class="badge-container"><span class="badge">Wide Rice Noodles</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Wide flat rice noodles stir-fried dry on maximum electric heat with bean sprouts, scallions, dark soy sauce, light soy, and Shaoxing wine.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=600&q=80');"><span>📷 Dan Dan Noodles</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">7. Spicy Dan Dan Noodles</h3><div class="badge-container"><span class="badge">Sesame & Chilli</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Wheat noodles coated in Chinese sesame paste (or peanut butter), Lao Gan Ma chilli crisp, light soy, Chinkiang vinegar, Sichuan pepper, and spiced minced pork/beef.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80');"><span>📷 Nasi Goreng</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">8. Nasi Goreng</h3><div class="badge-container"><span class="badge">Indonesian Fried Rice</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Jasmine rice wok-fried with Kecap Manis (sweet dark soy sauce), sambal chilli paste, garlic, and onions, served with a crispy-edged fried egg on top.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=600&q=80');"><span>📷 Firecracker Noodles</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">9. Spicy Firecracker Noodles</h3><div class="badge-container"><span class="badge">Toban Djan Kick</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Thick egg noodles wok-tossed with Lee Kum Kee Toban Djan, garlic, ginger, crushed Sichuan peppercorns, red peppers, and onions.</p></div>
+            </div>
+        </div>
+        <div class="recipe-card" onclick="toggleCard(this)">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80');"><span>📷 Spice Box Hybrid</span></div>
+            <div class="recipe-content-pad">
+                <div class="recipe-header"><div><h3 class="recipe-title">10. Spice Box Rice Hybrid</h3><div class="badge-container"><span class="badge">Chips & Rice Mix</span></div></div><span class="toggle-icon">▼</span></div>
+                <div class="recipe-body" onclick="event.stopPropagation()"><p>Egg fried rice mixed 50/50 with oven chips, tossed dry in a hot pan with peppers, onions, chillies, garlic, and salt & chilli seasoning.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 3: INGREDIENTS & BALLYMOUNT -->
+    <div id="view-3" class="view-section">
+        <div class="recipe-card">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80');"><span>🛒 Asia Market Ballymount</span></div>
+            <div class="recipe-content-pad">
+                <h3 style="color:var(--accent-color); margin-top:0;">Asia Market Ballymount Pantry</h3>
+                <ul class="checklist">
+                    <li><input type="checkbox"> **Goldfish Brand Curry Paste** (Essential for 3-in-1 takeaway curry)</li>
+                    <li><input type="checkbox"> **Ajinomoto MSG** (Umami crystals for rice, noodles & spice mixes)</li>
+                    <li><input type="checkbox"> **Pagoda Shaoxing Cooking Wine** (Meat velveting & Wok Hei pan splash)</li>
+                    <li><input type="checkbox"> **Pearl River Bridge Light Soy Sauce** (Clean salty seasoning base)</li>
+                    <li><input type="checkbox"> **Lee Kum Kee Dark Soy & Oyster Sauce** (Rich color & gravy body)</li>
+                    <li><input type="checkbox"> **Lao Gan Ma Chili Crisp & Toban Djan** (Sichuan fire & paste)</li>
+                    <li><input type="checkbox"> **Chinkiang Black Rice Vinegar** (Tangy kick for Honey Chilli & Kung Po)</li>
+                    <li><input type="checkbox"> **Bulk Indian Spices & Kasuri Methi** (Garam masala, cardamom, fenugreek)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h3>🛒 Supermarket Run (Tesco / Aldi / Dunnes / Lidl)</h3>
+            <p><strong>Fresh Staples:</strong> Chicken breast fillets, beef flank steak, pork loin, lamb shoulder, peeled king prawns, red/green bell peppers, Spanish onions, scallions, red chillies, garlic, ginger, coriander, eggs, double cream, butter, coconut milk, passata, Jasmine & Basmati rice, frozen straight-cut chips.</p>
+        </div>
+    </div>
+
+    <!-- VIEW 4: ELECTRIC HOB STRATEGY -->
+    <div id="view-4" class="view-section">
+        <div class="recipe-card" style="margin-bottom: 14px;">
+            <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80');"><span>⚡ Electric Hob Masterclass</span></div>
+        </div>
+        <div class="guide-box" style="border-left-color: #ffb703; background: #221e11;">
+            <h3 style="color: #ffb703;">⚡ Electric Hob Masterclass</h3>
+            <p><strong>1. Flat-Bottomed Pan:</strong> Use a flat-bottomed carbon steel wok or heavy cast-iron/stainless-steel skillet. Round woks wobble and lose up to 70% heat contact on electric rings.</p>
+            <p><strong>2. 5-Minute Preheat:</strong> Electric elements take time to reach peak temperature. Turn your cooking zone to maximum high 4 to 5 minutes before cooking.</p>
+            <p><strong>3. Single Batch Rule:</strong> Cook meat or wet vegetables in small single-portion batches (150g–200g). Overloading the pan causes a thermal drop, stewing food instead of frying it.</p>
+            <p><strong>4. Two-Ring Control:</strong> Set one ring to Max for searing/stir-frying, and a neighboring ring to Medium/Low for simmering curries and thickening sauces.</p>
+            <p><strong>5. Wok Hei Splash:</strong> Splash 1 tbsp of Shaoxing wine down the screaming-hot inner wall of the pan right before taking it off the heat for authentic takeaway aroma.</p>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(index) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const sections = document.querySelectorAll('.view-section');
+            
+            buttons.forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            sections.forEach((sec, i) => {
+                sec.classList.toggle('active', i === index);
+            });
+        }
+
+        function toggleCard(card) {
+            card.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
