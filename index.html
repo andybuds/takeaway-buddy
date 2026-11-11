@@ -181,15 +181,16 @@
         }
         .checklist { list-style: none; padding: 0; margin: 0 0 15px 0; }
         .checklist li {
-            padding: 6px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #252525;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
             font-size: 0.88rem;
             color: #ccc;
+            line-height: 1.4;
         }
-        .checklist input[type="checkbox"] { accent-color: var(--accent-color); width: 18px; height: 18px; cursor: pointer; }
+        .checklist input[type="checkbox"] { accent-color: var(--accent-color); width: 18px; height: 18px; cursor: pointer; margin-top: 2px; }
         .step-list { padding-left: 20px; font-size: 0.88rem; line-height: 1.5; color: #ccc; margin: 0; }
         .step-list li { margin-bottom: 8px; }
 
@@ -203,6 +204,15 @@
             line-height: 1.5;
         }
         .guide-box h3 { color: #2ec4b6; margin-top: 0; margin-bottom: 8px; }
+        .brand-badge {
+            background: #ffb703;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.72rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+        }
     </style>
 </head>
 <body>
@@ -217,7 +227,7 @@
         <button class="tab-btn active" onclick="switchTab(0)">Top 10 Chinese</button>
         <button class="tab-btn" onclick="switchTab(1)">Top 10 Indian</button>
         <button class="tab-btn" onclick="switchTab(2)">Top 10 Rice & Noodles</button>
-        <button class="tab-btn" onclick="switchTab(3)">Ingredients & Ballymount</button>
+        <button class="tab-btn" onclick="switchTab(3)">Ingredients & Brands</button>
         <button class="tab-btn" onclick="switchTab(4)">Electric Hob Strategy</button>
     </div>
 
@@ -448,15 +458,59 @@
         <div class="recipe-card" style="cursor: default;">
             <div class="recipe-img-banner" style="background-image: url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80');"><span>🛒 Asia Market Ballymount</span></div>
             <div class="recipe-content-pad" style="display:block;">
-                <h3 style="color:var(--accent-color); margin-top:0;">Asia Market Ballymount Pantry</h3>
+                <h3 style="color:var(--accent-color); margin-top:0;">Asia Market Ballymount Pantry & Best Brands</h3>
+                <p style="font-size:0.85rem; color:#aaa; margin-bottom:12px;">Specific brand recommendations to hit exact takeaway flavors at the lowest cost per gram:</p>
+                
                 <ul class="checklist">
-                    <li><input type="checkbox"> **Goldfish Brand Curry Paste**</li>
-                    <li><input type="checkbox"> **Ajinomoto MSG**</li>
-                    <li><input type="checkbox"> **Pagoda Shaoxing Cooking Wine**</li>
-                    <li><input type="checkbox"> **Pearl River Bridge Light Soy Sauce**</li>
-                    <li><input type="checkbox"> **Lao Gan Ma Chili Crisp & Toban Djan**</li>
+                    <li>
+                        <input type="checkbox">
+                        <div>
+                            <strong>MSG (Monosodium Glutamate)</strong> <span class="brand-badge">Ajinomoto</span>
+                            <br><span style="font-size:0.8rem; color:#888;">Buy 1kg bag at Asia Market (<€5). Standard supermarkets rarely sell pure MSG.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <div>
+                            <strong>Takeaway Curry Paste</strong> <span class="brand-badge">Goldfish Brand</span>
+                            <br><span style="font-size:0.8rem; color:#888;">Essential 405g tub for authentic 3-in-1 curry gravy.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <div>
+                            <strong>Indian Ground Spices & Kasuri Methi</strong> <span class="brand-badge">TRS / MDH</span>
+                            <br><span style="font-size:0.8rem; color:#888;">400g bags of Garam Masala & Kashmiri Chilli give deep color without excess burn.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <div>
+                            <strong>Chilli Crisp & Szechuan Pastes</strong> <span class="brand-badge">Lao Gan Ma / Lee Kum Kee</span>
+                            <br><span style="font-size:0.8rem; color:#888;">Crispy Chili in Oil (Lao Gan Ma) and Toban Djan (Lee Kum Kee) for Firecracker & Dan Dan.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <div>
+                            <strong>Shaoxing Rice Wine</strong> <span class="brand-badge">Pagoda Brand</span>
+                            <br><span style="font-size:0.8rem; color:#888;">Red bottle. Essential for meat velveting and wok aroma splashes.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <div>
+                            <strong>Soy Sauces & Black Rice Vinegar</strong> <span class="brand-badge">Pearl River Bridge / LKK</span>
+                            <br><span style="font-size:0.8rem; color:#888;">Light Soy (PRB), Dark Soy (LKK), and Chinkiang Black Rice Vinegar.</span>
+                        </div>
+                    </li>
                 </ul>
             </div>
+        </div>
+
+        <div class="guide-box">
+            <h3>🛒 Supermarket Run (Tesco / Aldi / Dunnes)</h3>
+            <p><strong>Fresh Perishables:</strong> Chicken breast fillets, beef flank, pork loin, peeled king prawns, red/green peppers, onions, scallions, fresh chillies, garlic, ginger, coriander, eggs, double cream, butter, coconut milk, passata, Jasmine & Basmati rice, frozen chips.</p>
         </div>
     </div>
 
@@ -467,6 +521,7 @@
             <p><strong>1. Flat-Bottomed Pan:</strong> Use flat carbon steel woks to retain 70% more heat contact.</p>
             <p><strong>2. 5-Minute Preheat:</strong> Crank the electric ring to max 5 minutes before cooking.</p>
             <p><strong>3. Single Batch Rule:</strong> Cook 150g–200g portions max to avoid stewing.</p>
+            <p><strong>4. Two-Ring Setup:</strong> One ring on MAX for searing, second ring on LOW for curries/gravy.</p>
         </div>
     </div>
 
@@ -506,37 +561,37 @@
             spicebag: {
                 title: "The Irish Takeaway Spice Bag",
                 prep: "10 mins", cook: "12 mins",
-                ingredients: ["300g <span id='activeProtein'>Chicken breast strips</span> (starch-dusted)", "1 portion Frozen straight-cut chips", "1/2 Bell Pepper & Onion (sliced)", "2 Fresh Red Chillies", "1 tbsp House Spice Salt (5-spice, Sichuan pepper, garlic powder, salt, MSG)"],
+                ingredients: ["300g <span id='activeProtein'>Chicken breast strips</span> (starch-dusted)", "1 portion Frozen straight-cut chips", "1/2 Bell Pepper & Onion (sliced)", "2 Fresh Red Chillies", "1 tbsp House Spice Salt (5-spice, Sichuan pepper, garlic powder, salt, Ajinomoto MSG)"],
                 steps: ["Bake or fry your straight-cut chips until golden and crispy.", "Coat your chosen protein in egg white and cornflour, then fry until extra crispy.", "Heat your flat-bottomed pan on maximum electric heat for 5 minutes.", "Toss chips, crispy protein, peppers, onions, and chillies in the roaring hot pan.", "Dust generously with 1 tbsp of House Spice Salt and toss vigorously for 60 seconds."]
             },
             satay: {
                 title: "Takeaway Satay Sauce Stir-Fry",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["250g <span id='activeProtein'>Sliced chicken breast</span>", "3 tbsp Smooth peanut butter", "100ml Coconut milk", "1 tbsp Soy sauce & 1 tsp Curry powder", "Bell peppers and onions"],
+                ingredients: ["250g <span id='activeProtein'>Sliced chicken breast</span>", "3 tbsp Smooth peanut butter", "100ml Coconut milk", "1 tbsp Light Soy sauce & 1 tsp Curry powder", "Bell peppers and onions"],
                 steps: ["Whisk peanut butter, coconut milk, curry powder, and soy sauce.", "Sear your chosen protein on high heat for 3 minutes until browned.", "Wok-fry peppers and onions until tender-crisp.", "Pour in satay mixture, return protein, and simmer for 2 minutes."]
             },
             honeychilli: {
                 title: "Shredded Honey Chilli",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["300g <span id='activeProtein'>Shredded protein</span>", "2 tbsp Honey & 2 tbsp Sweet Chilli sauce", "1 tbsp Chinkiang black rice vinegar", "1 tbsp Dark soy sauce & garlic"],
+                ingredients: ["300g <span id='activeProtein'>Shredded protein</span>", "2 tbsp Honey & 2 tbsp Sweet Chilli sauce", "1 tbsp Chinkiang black rice vinegar", "1 tbsp PRB Dark soy sauce & garlic"],
                 steps: ["Toss protein in cornflour and fry until crispy.", "In a separate pan, combine honey, sweet chilli, dark soy, vinegar, and garlic.", "Toss crispy protein into the sticky glaze for 30 seconds."]
             },
             curry3in1: {
                 title: "Takeaway Curry (3-in-1 / 4-in-1)",
                 prep: "10 mins", cook: "15 mins",
-                ingredients: ["300g <span id='activeProtein'>Diced chicken pieces</span>", "3 tbsp Goldfish curry paste", "1 Onion & garden peas", "Portion of chips and boiled/fried rice"],
+                ingredients: ["300g <span id='activeProtein'>Diced chicken pieces</span>", "3 tbsp Goldfish Brand curry paste", "1 Onion & garden peas", "Portion of chips and boiled/fried rice"],
                 steps: ["Simmer Goldfish curry paste with water, onions, and peas until smooth and thick.", "Pan-fry your chosen protein until golden.", "Serve curry sauce over your chips and rice base."]
             },
             szechuan: {
                 title: "Szechuan / Firecracker",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein strips</span>", "1 tbsp Toban Djan & Lao Gan Ma", "Sichuan peppercorns & garlic", "Bell peppers and onions"],
-                steps: ["Heat max-temp wok, bloom Sichuan peppercorns and chilli paste in oil.", "Stir-fry protein and vegetables vigorously on high electric heat.", "Splash Shaoxing wine and finish sauce."]
+                ingredients: ["300g <span id='activeProtein'>Protein strips</span>", "1 tbsp Lee Kum Kee Toban Djan & Lao Gan Ma", "Sichuan peppercorns & garlic", "Bell peppers and onions"],
+                steps: ["Heat max-temp wok, bloom Sichuan peppercorns and chilli paste in oil.", "Stir-fry protein and vegetables vigorously on high electric heat.", "Splash Pagoda Shaoxing wine and finish sauce."]
             },
             blackbean: {
                 title: "Black Bean Sauce Stir-Fry",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein</span>", "2 tbsp Fermented black beans (mashed)", "Garlic, ginger, and soy sauce", "Green peppers and onions"],
+                ingredients: ["300g <span id='activeProtein'>Protein</span>", "2 tbsp Fermented black beans (mashed)", "Garlic, ginger, and PRB light soy sauce", "Green peppers and onions"],
                 steps: ["Mash black beans with garlic and ginger.", "Stir-fry protein and peppers on high heat.", "Add black bean paste, Shaoxing wine, and light stock to coat."]
             },
             kungpo: {
@@ -548,7 +603,7 @@
             saltchilli: {
                 title: "Salt & Chilli Wok-Tossed",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein chunks</span>", "Cornflour coating", "Fresh red chillies, garlic, and scallions", "Sichuan pepper salt"],
+                ingredients: ["300g <span id='activeProtein'>Protein chunks</span>", "Cornflour coating", "Fresh red chillies, garlic, and scallions", "Sichuan pepper salt & Ajinomoto MSG"],
                 steps: ["Deep fry starch-dusted protein until ultra crispy.", "Toss dry in a screaming-hot wok with chillies, garlic, and salt & chilli seasoning."]
             },
             sweetsour: {
@@ -560,13 +615,13 @@
             blackpepper: {
                 title: "Black Pepper Sauce Stir-Fry",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein</span>", "1 tbsp Coarsely cracked black pepper", "Dark soy, oyster sauce, and garlic", "Onions and peppers"],
+                ingredients: ["300g <span id='activeProtein'>Protein</span>", "1 tbsp Coarsely cracked black pepper", "Dark soy, Lee Kum Kee oyster sauce, and garlic"],
                 steps: ["Bloom cracked black pepper in hot garlic oil.", "Wok-fry protein and vegetables on high heat.", "Pour in soy-oyster gravy and thicken."]
             },
             tikkamasala: {
                 title: "Chicken Tikka Masala",
                 prep: "20 mins", cook: "20 mins",
-                ingredients: ["400g <span id='activeProtein'>Chicken breast</span>", "150ml Tomato passata", "100ml Double cream & butter", "Garam masala and garlic-ginger paste"],
+                ingredients: ["400g <span id='activeProtein'>Chicken breast</span>", "150ml Tomato passata", "100ml Double cream & butter", "TRS Garam Masala & Kashmiri Chilli Powder"],
                 steps: ["Sear marinated chicken until charred.", "Melt butter, sauté garlic-ginger, add passata.", "Simmer, stir in cream and spices, add chicken."]
             },
             korma: {
@@ -584,7 +639,7 @@
             madras: {
                 title: "Madras",
                 prep: "15 mins", cook: "20 mins",
-                ingredients: ["400g <span id='activeProtein'>Protein</span>", "Red chilli powder & curry leaves", "Tomato purée and lemon juice"],
+                ingredients: ["400g <span id='activeProtein'>Protein</span>", "MDH Red chilli powder & curry leaves", "Tomato purée and lemon juice"],
                 steps: ["Bloom mustard seeds and curry leaves in oil.", "Simmer protein with fiery chili, tomato, and lemon juice."]
             },
             jalfrezi: {
@@ -596,19 +651,19 @@
             roganjosh: {
                 title: "Rogan Josh",
                 prep: "20 mins", cook: "30 mins",
-                ingredients: ["400g <span id='activeProtein'>Lamb or Protein</span>", "Kashmiri red chilli & fennel seeds", "Yoghurt base"],
+                ingredients: ["400g <span id='activeProtein'>Lamb or Protein</span>", "TRS Kashmiri red chilli & fennel seeds", "Yoghurt base"],
                 steps: ["Braise protein in rich onion gravy with Kashmiri chilli and fennel.", "Stir in yoghurt for a silky, vibrant finish."]
             },
             butterchicken: {
                 title: "Butter Chicken",
                 prep: "20 mins", cook: "20 mins",
-                ingredients: ["400g <span id='activeProtein'>Chicken</span>", "Abundant butter, cream, and tomato passata", "Kasuri Methi (fenugreek leaves)"],
+                ingredients: ["400g <span id='activeProtein'>Chicken</span>", "Abundant butter, cream, and tomato passata", "TRS Kasuri Methi (fenugreek leaves)"],
                 steps: ["Sear chicken, prepare smooth butter-tomato sauce, combine with cream and crushed fenugreek."]
             },
             bhuna: {
                 title: "Bhuna",
                 prep: "15 mins", cook: "25 mins",
-                ingredients: ["400g <span id='activeProtein'>Protein</span>", "Onions, garlic, ginger, and whole spices"],
+                ingredients: ["400g <span id='activeProtein'>Protein</span>", "Onions, garlic, ginger, and whole TRS spices"],
                 steps: ["Cook down onions and spices heavily until dark and concentrated, coating the protein."]
             },
             vindaloo: {
@@ -626,19 +681,19 @@
             eggfriedrice: {
                 title: "Takeaway Egg Fried Rice",
                 prep: "5 mins", cook: "5 mins",
-                ingredients: ["2 cups Cold day-old Jasmine rice", "2 Eggs", "MSG, white pepper, and light soy sauce"],
+                ingredients: ["2 cups Cold day-old Jasmine rice", "2 Eggs", "Ajinomoto MSG, white pepper, and light soy sauce"],
                 steps: ["Scramble eggs in hot wok, add cold rice, toss with soy and MSG on max heat."]
             },
             yeungchow: {
                 title: "Yeung Chow / Special Fried Rice",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Jasmine rice, Char Siu pork, king prawns, chicken, and peas", "Light soy and white pepper"],
+                ingredients: ["Jasmine rice, Char Siu pork, king prawns, chicken, and peas", "PRB Light soy and Ajinomoto MSG"],
                 steps: ["Wok-fry cold rice with mixed meats, peas, soy sauce, and scallions."]
             },
             chowmein: {
                 title: "Irish Soft Chow Mein",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Fresh egg noodles, bean sprouts, onions", "<span id='activeProtein'>Protein</span>", "Light/dark soy and oyster sauce"],
+                ingredients: ["Fresh egg noodles, bean sprouts, onions", "<span id='activeProtein'>Protein</span>", "Light/dark soy and Lee Kum Kee oyster sauce"],
                 steps: ["Boil noodles briefly, toss in max-heat wok with protein, bean sprouts, and soy-oyster sauce."]
             },
             crispynoodle: {
@@ -650,19 +705,19 @@
             singaporevermicelli: {
                 title: "Singapore Rice Vermicelli",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Thin rice vermicelli noodles", "Madras curry powder, egg ribbons, and bean sprouts"],
+                ingredients: ["Thin rice vermicelli noodles", "TRS Madras curry powder, egg ribbons, and bean sprouts"],
                 steps: ["Soak noodles, stir-fry with curry powder, egg, and vegetables on high heat."]
             },
             beefhofun: {
                 title: "Beef Ho Fun (Flat Rice Noodles)",
                 prep: "10 mins", cook: "6 mins",
-                ingredients: ["Wide flat rice noodles", "Sliced beef, bean sprouts, and dark soy"],
+                ingredients: ["Wide flat rice noodles", "Sliced beef, bean sprouts, and LKK dark soy"],
                 steps: ["Stir-fry flat noodles dry on maximum heat with beef and dark soy for Wok Hei."]
             },
             dandan: {
                 title: "Spicy Dan Dan Noodles",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["Wheat noodles, Chinese sesame paste, and chilli crisp", "Minced pork"],
+                ingredients: ["Wheat noodles, Chinese sesame paste, Lao Gan Ma chilli crisp", "Minced pork"],
                 steps: ["Mix sesame paste and chilli oil in bowl, combine with boiled noodles and spiced mince."]
             },
             nasigoreng: {
@@ -674,13 +729,13 @@
             firecrackernoodles: {
                 title: "Spicy Firecracker Noodles",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Thick egg noodles, Toban Djan, garlic, and peppers"],
+                ingredients: ["Thick egg noodles, Lee Kum Kee Toban Djan, garlic, and peppers"],
                 steps: ["Toss thick noodles with spicy bean paste, garlic, and peppers on max heat."]
             },
             spiceboxhybrid: {
                 title: "Spice Box Rice Hybrid",
                 prep: "10 mins", cook: "10 mins",
-                ingredients: ["Egg fried rice mixed 50/50 with chips", "Peppers, onions, chillies, and spice salt"],
+                ingredients: ["Egg fried rice mixed 50/50 with chips", "Peppers, onions, chillies, and spice salt + Ajinomoto MSG"],
                 steps: ["Toss rice and chips together in a roaring hot pan with spice salt and chillies."]
             }
         };
