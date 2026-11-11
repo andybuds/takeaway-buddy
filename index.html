@@ -192,7 +192,7 @@
         }
         .checklist input[type="checkbox"] { accent-color: var(--accent-color); width: 18px; height: 18px; cursor: pointer; margin-top: 2px; }
         .step-list { padding-left: 20px; font-size: 0.88rem; line-height: 1.5; color: #ccc; margin: 0; }
-        .step-list li { margin-bottom: 8px; }
+        .step-list li { margin-bottom: 10px; }
 
         .guide-box {
             background: #1a2421;
@@ -560,183 +560,468 @@
         const recipeDatabase = {
             spicebag: {
                 title: "The Irish Takeaway Spice Bag",
-                prep: "10 mins", cook: "12 mins",
-                ingredients: ["300g <span id='activeProtein'>Chicken breast strips</span> (starch-dusted)", "1 portion Frozen straight-cut chips", "1/2 Bell Pepper & Onion (sliced)", "2 Fresh Red Chillies", "1 tbsp House Spice Salt (5-spice, Sichuan pepper, garlic powder, salt, Ajinomoto MSG)"],
-                steps: ["Bake or fry your straight-cut chips until golden and crispy.", "Coat your chosen protein in egg white and cornflour, then fry until extra crispy.", "Heat your flat-bottomed pan on maximum electric heat for 5 minutes.", "Toss chips, crispy protein, peppers, onions, and chillies in the roaring hot pan.", "Dust generously with 1 tbsp of House Spice Salt and toss vigorously for 60 seconds."]
+                prep: "15 mins", cook: "12 mins",
+                ingredients: [
+                    "300g <span id='activeProtein'>Chicken breast strips</span> (starch-dusted)",
+                    "1 portion Frozen straight-cut chips",
+                    "1/2 Red & Green Bell Pepper (sliced)",
+                    "1/2 Spanish Onion (chunked)",
+                    "2 Fresh Red Chillies (sliced)",
+                    "1 tbsp House Spice Salt (5-spice, Sichuan pepper, garlic powder, salt, Ajinomoto MSG)"
+                ],
+                steps: [
+                    "<strong>Chip Prep:</strong> Bake or fry your straight-cut chips until golden, crispy, and piping hot.",
+                    "<strong>Velveting Protein:</strong> Toss your chosen protein in egg white and cornflour, then shallow fry on high heat until extra crispy and cooked through.",
+                    "<strong>Thermal Preheat:</strong> Heat your flat-bottomed pan on maximum electric heat for 5 minutes.",
+                    "<strong>Wok Toss:</strong> Add chips, crispy protein, peppers, onions, and chillies directly into the roaring hot pan.",
+                    "<strong>Seasoning:</strong> Dust generously with 1 tbsp of House Spice Salt, toss vigorously for 60 seconds, and serve immediately."
+                ]
             },
             satay: {
                 title: "Takeaway Satay Sauce Stir-Fry",
-                prep: "10 mins", cook: "8 mins",
-                ingredients: ["250g <span id='activeProtein'>Sliced chicken breast</span>", "3 tbsp Smooth peanut butter", "100ml Coconut milk", "1 tbsp Light Soy sauce & 1 tsp Curry powder", "Bell peppers and onions"],
-                steps: ["Whisk peanut butter, coconut milk, curry powder, and soy sauce.", "Sear your chosen protein on high heat for 3 minutes until browned.", "Wok-fry peppers and onions until tender-crisp.", "Pour in satay mixture, return protein, and simmer for 2 minutes."]
+                prep: "10 mins", cook: "10 mins",
+                ingredients: [
+                    "300g <span id='activeProtein'>Sliced protein</span>",
+                    "3 tbsp Smooth peanut butter",
+                    "100ml Coconut milk",
+                    "1 tbsp PRB Light Soy sauce & 1 tsp curry powder",
+                    "1/2 Bell pepper, bamboo shoots, and onion"
+                ],
+                steps: [
+                    "<strong>Sauce Blend:</strong> Whisk smooth peanut butter, coconut milk, curry powder, and light soy sauce in a small bowl until smooth.",
+                    "<strong>High-Heat Sear:</strong> Preheat your flat pan on max for 5 minutes, sear the protein for 3 minutes until browned, then remove.",
+                    "<strong>Wok Veggies:</strong> Quick-fry bell peppers, onions, and bamboo shoots for 2 minutes until tender-crisp.",
+                    "<strong>Simmer & Finish:</strong> Pour in the satay mixture and return the protein, simmering for 2 minutes until glossy and thick."
+                ]
             },
             honeychilli: {
                 title: "Shredded Honey Chilli",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["300g <span id='activeProtein'>Shredded protein</span>", "2 tbsp Honey & 2 tbsp Sweet Chilli sauce", "1 tbsp Chinkiang black rice vinegar", "1 tbsp PRB Dark soy sauce & garlic"],
-                steps: ["Toss protein in cornflour and fry until crispy.", "In a separate pan, combine honey, sweet chilli, dark soy, vinegar, and garlic.", "Toss crispy protein into the sticky glaze for 30 seconds."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Shredded protein</span>",
+                    "2 tbsp Honey & 2 tbsp Sweet Chilli sauce",
+                    "1 tbsp Chinkiang black rice vinegar",
+                    "1 tbsp PRB Dark soy sauce & minced garlic",
+                    "Cornflour for coating"
+                ],
+                steps: [
+                    "<strong>Coating:</strong> Toss shredded protein thoroughly in cornflour until fully sealed.",
+                    "<strong>Crisp Up:</strong> Fry in hot oil until crispy and golden brown, then drain on paper towels.",
+                    "<strong>Glaze Prep:</strong> In a separate hot pan, combine honey, sweet chilli, dark soy, Chinkiang vinegar, and minced garlic.",
+                    "<strong>Toss:</strong> Throw the crispy protein into the sticky glaze for 30 seconds on high heat and serve."
+                ]
             },
             curry3in1: {
                 title: "Takeaway Curry (3-in-1 / 4-in-1)",
                 prep: "10 mins", cook: "15 mins",
-                ingredients: ["300g <span id='activeProtein'>Diced chicken pieces</span>", "3 tbsp Goldfish Brand curry paste", "1 Onion & garden peas", "Portion of chips and boiled/fried rice"],
-                steps: ["Simmer Goldfish curry paste with water, onions, and peas until smooth and thick.", "Pan-fry your chosen protein until golden.", "Serve curry sauce over your chips and rice base."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Diced chicken or protein</span>",
+                    "3 tbsp Goldfish Brand curry paste",
+                    "1 Spanish Onion & handful of garden peas",
+                    "Portion of chips and Jasmine rice"
+                ],
+                steps: [
+                    "<strong>Build Gravy:</strong> Simmer Goldfish curry paste with water, sliced onions, and garden peas in a saucepan until smooth and thick.",
+                    "<strong>Sear Protein:</strong> Pan-fry your chosen protein on medium-high heat until golden and fully cooked.",
+                    "<strong>Assembly:</strong> Plate your crispy chips and cooked rice side-by-side.",
+                    "<strong>Pour:</strong> Drench generously with the hot Goldfish curry sauce and top with the protein."
+                ]
             },
             szechuan: {
                 title: "Szechuan / Firecracker",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein strips</span>", "1 tbsp Lee Kum Kee Toban Djan & Lao Gan Ma", "Sichuan peppercorns & garlic", "Bell peppers and onions"],
-                steps: ["Heat max-temp wok, bloom Sichuan peppercorns and chilli paste in oil.", "Stir-fry protein and vegetables vigorously on high electric heat.", "Splash Pagoda Shaoxing wine and finish sauce."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Protein strips</span>",
+                    "1 tbsp Lee Kum Kee Toban Djan & 1 tsp Lao Gan Ma chilli crisp",
+                    "1 tsp Sichuan peppercorns & minced garlic",
+                    "Bell peppers and onions"
+                ],
+                steps: [
+                    "<strong>Bloom Spice:</strong> Heat your max-temp wok for 5 mins, add oil, and bloom Sichuan peppercorns, Toban Djan, and garlic for 30 seconds.",
+                    "<strong>Stir-Fry:</strong> Add protein strips and stir-fry vigorously on maximum heat for 3–4 minutes.",
+                    "<strong>Add Veg:</strong> Toss in bell peppers and onions, cooking for 2 minutes.",
+                    "<strong>Wok Hei Splash:</strong> Splash Pagoda Shaoxing wine down the hot pan sides, toss, and serve."
+                ]
             },
             blackbean: {
                 title: "Black Bean Sauce Stir-Fry",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein</span>", "2 tbsp Fermented black beans (mashed)", "Garlic, ginger, and PRB light soy sauce", "Green peppers and onions"],
-                steps: ["Mash black beans with garlic and ginger.", "Stir-fry protein and peppers on high heat.", "Add black bean paste, Shaoxing wine, and light stock to coat."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Protein</span>",
+                    "2 tbsp Fermented black beans (rinsed and mashed)",
+                    "Minced garlic, ginger, and PRB light soy sauce",
+                    "Green bell peppers and onions"
+                ],
+                steps: [
+                    "<strong>Prep Paste:</strong> Mash salted fermented black beans with garlic and fresh ginger.",
+                    "<strong>Sear:</strong> High-heat stir-fry your protein and green peppers for 3 minutes until seared.",
+                    "<strong>Sauce Integration:</strong> Stir in the black bean paste, a splash of Shaoxing wine, and light stock.",
+                    "<strong>Thicken:</strong> Simmer for 2 minutes until the savory black bean sauce clings tightly to the ingredients."
+                ]
             },
             kungpo: {
                 title: "Kung Po Stir-Fry",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein</span>", "Dry red chillies & roasted peanuts", "Chinkiang vinegar, soy, and sugar", "Scallions"],
-                steps: ["Flash-fry protein and remove.", "Bloom dry chillies in oil, add sauce mixture and peanuts.", "Toss protein back in on max heat until glazed."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Protein</span>",
+                    "Whole dried red chillies & roasted peanuts",
+                    "Chinkiang vinegar, light soy, and sugar sauce mix",
+                    "Chopped scallions"
+                ],
+                steps: [
+                    "<strong>Flash Fry:</strong> Sear protein on max heat for 3 minutes, then remove from pan.",
+                    "<strong>Aromatics:</strong> Flash-fry dry red chillies and garlic in oil until fragrant (do not burn).",
+                    "<strong>Glaze:</strong> Pour in the Chinkiang vinegar and soy sauce mixture along with roasted peanuts.",
+                    "<strong>Combine:</strong> Return protein to the pan, toss on high heat until reduced to a shiny glaze, and garnish with scallions."
+                ]
             },
             saltchilli: {
                 title: "Salt & Chilli Wok-Tossed",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein chunks</span>", "Cornflour coating", "Fresh red chillies, garlic, and scallions", "Sichuan pepper salt & Ajinomoto MSG"],
-                steps: ["Deep fry starch-dusted protein until ultra crispy.", "Toss dry in a screaming-hot wok with chillies, garlic, and salt & chilli seasoning."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Protein chunks</span>",
+                    "Cornflour coating",
+                    "Fresh red chillies, garlic, and scallions",
+                    "Sichuan pepper salt & Ajinomoto MSG"
+                ],
+                steps: [
+                    "<strong>Coat & Fry:</strong> Dust protein chunks in cornflour and deep-fry or pan-fry until ultra crispy.",
+                    "<strong>Preheat Pan:</strong> Get your flat wok screaming hot for 5 minutes without oil first.",
+                    "<strong>Dry Toss:</strong> Add a touch of oil, minced garlic, chopped red chillies, and scallions.",
+                    "<strong>Finish:</strong> Toss crispy protein and spice salt vigorously on max heat for 45 seconds."
+                ]
             },
             sweetsour: {
                 title: "Sweet & Sour (Hong Kong Style)",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["300g <span id='activeProtein'>Battered protein</span>", "Pineapple chunks, onion, and bell peppers", "Ketchup, vinegar, and sugar sauce"],
-                steps: ["Fry battered protein until crisp.", "Quickly stir-fry peppers, onions, and pineapple.", "Pour in sweet & sour sauce, toss with protein and serve."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Battered protein</span>",
+                    "Pineapple chunks, onion, and red/green peppers",
+                    "Ketchup, white vinegar, sugar, and water sauce mix"
+                ],
+                steps: [
+                    "<strong>Fry Protein:</strong> Coat protein in batter and fry until crisp and golden.",
+                    "<strong>Wok Veg:</strong> Quickly stir-fry peppers, onions, and pineapple chunks in a hot pan for 2 minutes.",
+                    "<strong>Simmer Sauce:</strong> Pour in ketchup, vinegar, and sugar mixture, bringing it to a bubbling boil.",
+                    "<strong>Combine:</strong> Toss the crispy protein into the sweet and sour sauce for 30 seconds and serve."
+                ]
             },
             blackpepper: {
                 title: "Black Pepper Sauce Stir-Fry",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["300g <span id='activeProtein'>Protein</span>", "1 tbsp Coarsely cracked black pepper", "Dark soy, Lee Kum Kee oyster sauce, and garlic"],
-                steps: ["Bloom cracked black pepper in hot garlic oil.", "Wok-fry protein and vegetables on high heat.", "Pour in soy-oyster gravy and thicken."]
+                ingredients: [
+                    "300g <span id='activeProtein'>Protein</span>",
+                    "1 tbsp Coarsely cracked black pepper",
+                    "PRB Dark soy, Lee Kum Kee oyster sauce, and garlic",
+                    "Onions and bell peppers"
+                ],
+                steps: [
+                    "<strong>Bloom Pepper:</strong> Bloom coarsely cracked black pepper in hot garlic oil for 30 seconds.",
+                    "<strong>Stir-Fry:</strong> Add protein and sliced onions/peppers, stir-frying on maximum electric heat.",
+                    "<strong>Gravy:</strong> Pour in dark soy, oyster sauce, and a splash of water.",
+                    "<strong>Reduce:</strong> Simmer for 2 minutes until the peppery brown gravy coats the back of a spoon."
+                ]
             },
             tikkamasala: {
                 title: "Chicken Tikka Masala",
                 prep: "20 mins", cook: "20 mins",
-                ingredients: ["400g <span id='activeProtein'>Chicken breast</span>", "150ml Tomato passata", "100ml Double cream & butter", "TRS Garam Masala & Kashmiri Chilli Powder"],
-                steps: ["Sear marinated chicken until charred.", "Melt butter, sauté garlic-ginger, add passata.", "Simmer, stir in cream and spices, add chicken."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Chicken breast</span> (cubed)",
+                    "150ml Tomato passata",
+                    "100ml Double cream & 2 tbsp butter",
+                    "TRS Garam Masala & MDH Kashmiri Chilli Powder",
+                    "Garlic-ginger paste"
+                ],
+                steps: [
+                    "<strong>Sear Chicken:</strong> Marinate chicken in yoghurt and spices, then sear on high heat until nicely charred.",
+                    "<strong>Aromatics:</strong> Melt butter in a secondary pan, sauté garlic-ginger paste until fragrant.",
+                    "<strong>Simmer Passata:</strong> Pour in tomato passata and simmer for 10 minutes to cook out raw acidity.",
+                    "<strong>Cream & Finish:</strong> Stir in double cream, garam masala, and seared chicken, simmering until rich."
+                ]
             },
             korma: {
                 title: "Creamy Korma",
                 prep: "15 mins", cook: "15 mins",
-                ingredients: ["400g <span id='activeProtein'>Chicken</span>", "100ml Coconut milk & single cream", "Ground almonds and cardamom"],
-                steps: ["Simmer protein gently in butter and aromatics.", "Stir in coconut milk, cream, and ground almonds until rich and silky."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Chicken</span>",
+                    "100ml Coconut milk & 50ml single cream",
+                    "Ground almonds and cardamom pods",
+                    "Butter and mild aromatics"
+                ],
+                steps: [
+                    "<strong>Gentle Sauté:</strong> Sauté protein in butter with crushed cardamom pods until sealed.",
+                    "<strong>Simmer Base:</strong> Stir in coconut milk and single cream over medium-low heat.",
+                    "<strong>Thicken:</strong> Whisk in ground almonds to build a silky, luxurious texture.",
+                    "<strong>Finish:</strong> Simmer gently for 8 minutes until the protein is tender."
+                ]
             },
             balti: {
                 title: "Takeaway Balti",
                 prep: "15 mins", cook: "15 mins",
-                ingredients: ["400g <span id='activeProtein'>Protein</span>", "Balti spice blend", "Onions, peppers, and fresh coriander"],
-                steps: ["High-heat flat pan stir-fry with balti spices, onions, and peppers.", "Simmer briefly with thick tomato base."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Protein</span>",
+                    "Balti spice blend",
+                    "Spanish onions, bell peppers, and fresh coriander"
+                ],
+                steps: [
+                    "<strong>Flat Pan Sear:</strong> Heat your flat-bottomed pan on high, add oil and balti spices.",
+                    "<strong>Flash Cook:</strong> Add protein, chunky onions, and bell peppers, stir-frying rapidly.",
+                    "<strong>Tomato Base:</strong> Add a ladle of rich tomato passata and stir-fry until semi-dry.",
+                    "<strong>Garnish:</strong> Finish with fresh coriander and serve hot."
+                ]
             },
             madras: {
                 title: "Madras",
                 prep: "15 mins", cook: "20 mins",
-                ingredients: ["400g <span id='activeProtein'>Protein</span>", "MDH Red chilli powder & curry leaves", "Tomato purée and lemon juice"],
-                steps: ["Bloom mustard seeds and curry leaves in oil.", "Simmer protein with fiery chili, tomato, and lemon juice."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Protein</span>",
+                    "MDH Red chilli powder & curry leaves",
+                    "Tomato purée and fresh lemon juice",
+                    "Mustard seeds"
+                ],
+                steps: [
+                    "<strong>Tempering:</strong> Bloom mustard seeds and fresh curry leaves in hot oil.",
+                    "<strong>Spice & Meat:</strong> Add protein and MDH red chilli powder, frying for 3 minutes.",
+                    "<strong>Simmer:</strong> Stir in tomato purée and water, simmering for 15 minutes until tender.",
+                    "<strong>Acid Balance:</strong> Finish with fresh lemon juice to sharpen the fiery curry."
+                ]
             },
             jalfrezi: {
                 title: "Jalfrezi",
                 prep: "15 mins", cook: "15 mins",
-                ingredients: ["400g <span id='activeProtein'>Protein</span>", "Green chillies, bell peppers, and thick tomato base"],
-                steps: ["Stir-fry protein with chunky peppers and green chillies on high heat.", "Coat in thick, tangy tomato masala."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Protein</span>",
+                    "Green chillies (slit), bell peppers, and onion petals",
+                    "Thick tomato passata and ground cumin"
+                ],
+                steps: [
+                    "<strong>High-Heat Sear:</strong> Preheat pan on max for 5 mins, sear protein for 4–5 mins, then remove.",
+                    "<strong>Aromatics:</strong> Fry garlic-ginger paste, onions, and chunky bell peppers for 3 minutes.",
+                    "<strong>Spice Bloom:</strong> Stir in cumin and red chilli powder for 30 seconds.",
+                    "<strong>Simmer & Combine:</strong> Add passata and slit green chillies, simmer into a thick gravy, then toss in protein for 2 minutes."
+                ]
             },
             roganjosh: {
                 title: "Rogan Josh",
                 prep: "20 mins", cook: "30 mins",
-                ingredients: ["400g <span id='activeProtein'>Lamb or Protein</span>", "TRS Kashmiri red chilli & fennel seeds", "Yoghurt base"],
-                steps: ["Braise protein in rich onion gravy with Kashmiri chilli and fennel.", "Stir in yoghurt for a silky, vibrant finish."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Lamb or Protein</span>",
+                    "TRS Kashmiri red chilli & fennel seeds",
+                    "Natural yoghurt base and onion gravy"
+                ],
+                steps: [
+                    "<strong>Braise Base:</strong> Cook down onion gravy infused with Kashmiri chilli and crushed fennel seeds.",
+                    "<strong>Brown Meat:</strong> Add protein and sear well in the spiced aromatics.",
+                    "<strong>Yoghurt Fold:</strong> Lower heat and slowly whisk in natural yoghurt to prevent curdling.",
+                    "<strong>Slow Simmer:</strong> Cover and simmer until the meat is melt-in-the-mouth tender."
+                ]
             },
             butterchicken: {
                 title: "Butter Chicken",
                 prep: "20 mins", cook: "20 mins",
-                ingredients: ["400g <span id='activeProtein'>Chicken</span>", "Abundant butter, cream, and tomato passata", "TRS Kasuri Methi (fenugreek leaves)"],
-                steps: ["Sear chicken, prepare smooth butter-tomato sauce, combine with cream and crushed fenugreek."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Chicken</span>",
+                    "Abundant butter, double cream, and tomato passata",
+                    "TRS Kasuri Methi (fenugreek leaves)"
+                ],
+                steps: [
+                    "<strong>Sear Chicken:</strong> Sear marinated chicken chunks in butter until golden.",
+                    "<strong>Smooth Sauce:</strong> Simmer passata and butter into a silky red base.",
+                    "<strong>Cream & Methi:</strong> Stir in double cream and crush Kasuri Methi between your palms into the sauce.",
+                    "<strong>Combine:</strong> Add chicken and simmer for 5 minutes until velvety."
+                ]
             },
             bhuna: {
                 title: "Bhuna",
                 prep: "15 mins", cook: "25 mins",
-                ingredients: ["400g <span id='activeProtein'>Protein</span>", "Onions, garlic, ginger, and whole TRS spices"],
-                steps: ["Cook down onions and spices heavily until dark and concentrated, coating the protein."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Protein</span>",
+                    "Onions, garlic, ginger, and whole TRS spices",
+                    "Thick masala base"
+                ],
+                steps: [
+                    "<strong>Heavy Reduction:</strong> Cook down onions, garlic, and ginger heavily in oil until dark and caramelized.",
+                    "<strong>Spice Toast:</strong> Toast whole spices in the reduced onion base.",
+                    "<strong>Coat Meat:</strong> Add protein and fry without extra liquid until the masala clings intensely.",
+                    "<strong>Finish:</strong> Simmer briefly until fully cooked and concentrated."
+                ]
             },
             vindaloo: {
                 title: "Vindaloo",
                 prep: "20 mins", cook: "30 mins",
-                ingredients: ["400g <span id='activeProtein'>Pork or Beef</span>", "Malt vinegar, heavy garlic, and red chilli paste", "Potatoes"],
-                steps: ["Marinate protein in vinegar and garlic paste, braise with potatoes and fiery chillies."]
+                ingredients: [
+                    "400g <span id='activeProtein'>Pork or Beef</span>",
+                    "Malt vinegar, heavy garlic paste, and red chilli paste",
+                    "Diced potatoes"
+                ],
+                steps: [
+                    "<strong>Acid Marinate:</strong> Marinate protein in malt vinegar and heavy garlic paste for 15 mins.",
+                    "<strong>Sear:</strong> Brown the marinated meat on high heat.",
+                    "<strong>Braise:</strong> Add chilli paste, potatoes, and water, simmering until tender and fiery.",
+                    "<strong>Rest:</strong> Let rest for 5 minutes before serving."
+                ]
             },
             munchbox: {
                 title: "Indian Spice Box / Munch Box",
                 prep: "15 mins", cook: "15 mins",
-                ingredients: ["Loaded Garlic naan", "Spiced <span id='activeProtein'>Chicken Tikka</span>", "Chips, peppers, onions, and mint yoghurt"],
-                steps: ["Load folded garlic naan with chips and spiced tikka.", "Top with grilled peppers, onions, and chutneys."]
+                ingredients: [
+                    "Loaded Garlic naan",
+                    "Spiced <span id='activeProtein'>Chicken Tikka</span>",
+                    "Chips, peppers, onions, mint yoghurt, and tamarind chutney"
+                ],
+                steps: [
+                    "<strong>Prep Elements:</strong> Bake chips and warm garlic naan; grill chicken tikka with peppers and onions.",
+                    "<strong>Assemble:</strong> Fold or load the garlic naan with crispy chips and spiced tikka.",
+                    "<strong>Garnish:</strong> Top with grilled peppers, onions, and drizzles of mint yoghurt and tamarind chutney."
+                ]
             },
             eggfriedrice: {
                 title: "Takeaway Egg Fried Rice",
                 prep: "5 mins", cook: "5 mins",
-                ingredients: ["2 cups Cold day-old Jasmine rice", "2 Eggs", "Ajinomoto MSG, white pepper, and light soy sauce"],
-                steps: ["Scramble eggs in hot wok, add cold rice, toss with soy and MSG on max heat."]
+                ingredients: [
+                    "2 cups Cold day-old Jasmine rice",
+                    "2 Large eggs (beaten)",
+                    "1 tsp Ajinomoto MSG & white pepper",
+                    "1 tbsp PRB Light soy sauce & sesame oil"
+                ],
+                steps: [
+                    "<strong>Cold Rice:</strong> Ensure Jasmine rice is completely cold and day-old.",
+                    "<strong>Scramble:</strong> Scramble eggs quickly in a max-heat wok, breaking them into small ribbons.",
+                    "<strong>Rice Add-In:</strong> Add cold rice, breaking up any clumps against the wok walls.",
+                    "<strong>Season:</strong> Splash light soy down the hot sides, toss with MSG and white pepper."
+                ]
             },
             yeungchow: {
                 title: "Yeung Chow / Special Fried Rice",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Jasmine rice, Char Siu pork, king prawns, chicken, and peas", "PRB Light soy and Ajinomoto MSG"],
-                steps: ["Wok-fry cold rice with mixed meats, peas, soy sauce, and scallions."]
+                ingredients: [
+                    "Jasmine rice, Char Siu pork, king prawns, chicken, and peas",
+                    "PRB Light soy sauce, white pepper, and Ajinomoto MSG"
+                ],
+                steps: [
+                    "<strong>Prep Meats:</strong> Dice cooked Char Siu pork, chicken, and peeled king prawns.",
+                    "<strong>Wok Rice:</strong> Wok-fry cold Jasmine rice on high heat with beaten egg.",
+                    "<strong>Toss Meats:</strong> Toss in mixed meats and garden peas until piping hot.",
+                    "<strong>Season:</strong> Finish with light soy sauce, MSG, and white pepper."
+                ]
             },
             chowmein: {
                 title: "Irish Soft Chow Mein",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Fresh egg noodles, bean sprouts, onions", "<span id='activeProtein'>Protein</span>", "Light/dark soy and Lee Kum Kee oyster sauce"],
-                steps: ["Boil noodles briefly, toss in max-heat wok with protein, bean sprouts, and soy-oyster sauce."]
+                ingredients: [
+                    "Fresh egg noodles, bean sprouts, sliced onions",
+                    "<span id='activeProtein'>Protein</span>",
+                    "PRB Light soy, LKK Dark soy, and oyster sauce"
+                ],
+                steps: [
+                    "<strong>Noodle Prep:</strong> Boil fresh egg noodles briefly, rinse in cold water, and drain.",
+                    "<strong>Sear Protein & Veg:</strong> High-heat stir-fry protein, onions, and bean sprouts in your wok.",
+                    "<strong>Toss Noodles:</strong> Add noodles and pour over light/dark soy and oyster sauce.",
+                    "<strong>Wok Finish:</strong> Toss vigorously on max heat for 60 seconds until glossy."
+                ]
             },
             crispynoodle: {
                 title: "Cantonese Crispy Chow Mein",
                 prep: "15 mins", cook: "12 mins",
-                ingredients: ["Thin egg noodles (pan-fried nest)", "Wok-fried meat and pak choi", "Savory brown gravy"],
-                steps: ["Pan-fry noodles into a crispy nest, top with wok-fried meat and gravy."]
+                ingredients: [
+                    "Thin egg noodles (pan-fried into a crispy nest)",
+                    "Wok-fried meat and pak choi",
+                    "Savory brown gravy"
+                ],
+                steps: [
+                    "<strong>Crispy Nest:</strong> Pan-fry thin egg noodles in a oiled skillet until golden and crispy on both sides.",
+                    "<strong>Wok Gravy:</strong> In a separate pan, stir-fry meat, garlic, and pak choi with stock and oyster sauce.",
+                    "<strong>Thicken:</strong> Thicken gravy with cornflour slurry.",
+                    "<strong>Assembly:</strong> Pour the hot savory meat and gravy directly over the crispy noodle nest."
+                ]
             },
             singaporevermicelli: {
                 title: "Singapore Rice Vermicelli",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Thin rice vermicelli noodles", "TRS Madras curry powder, egg ribbons, and bean sprouts"],
-                steps: ["Soak noodles, stir-fry with curry powder, egg, and vegetables on high heat."]
+                ingredients: [
+                    "Thin rice vermicelli noodles (soaked)",
+                    "TRS Madras curry powder, egg ribbons, and bean sprouts",
+                    "Sliced peppers and onions"
+                ],
+                steps: [
+                    "<strong>Soak Noodles:</strong> Soak rice vermicelli in warm water until pliable, then drain.",
+                    "<strong>Curry Bloom:</strong> Stir-fry onions, peppers, and Madras curry powder in hot oil.",
+                    "<strong>Toss:</strong> Add drained vermicelli, bean sprouts, and egg ribbons.",
+                    "<strong>Finish:</strong> Toss rapidly on high heat until evenly coated and fragrant."
+                ]
             },
             beefhofun: {
                 title: "Beef Ho Fun (Flat Rice Noodles)",
                 prep: "10 mins", cook: "6 mins",
-                ingredients: ["Wide flat rice noodles", "Sliced beef, bean sprouts, and LKK dark soy"],
-                steps: ["Stir-fry flat noodles dry on maximum heat with beef and dark soy for Wok Hei."]
+                ingredients: [
+                    "Wide flat rice noodles",
+                    "Sliced beef flank, bean sprouts, and scallions",
+                    "LKK Dark soy sauce and light soy"
+                ],
+                steps: [
+                    "<strong>Dry Wok Sear:</strong> Stir-fry wide flat rice noodles dry on maximum heat to impart Wok Hei.",
+                    "<strong>Beef Cook:</strong> Sear velveted beef separately and set aside.",
+                    "<strong>Combine:</strong> Toss noodles, beef, bean sprouts, and scallions together.",
+                    "<strong>Soy Finish:</strong> Splash dark and light soy sauce, tossing for 30 seconds."
+                ]
             },
             dandan: {
                 title: "Spicy Dan Dan Noodles",
                 prep: "15 mins", cook: "10 mins",
-                ingredients: ["Wheat noodles, Chinese sesame paste, Lao Gan Ma chilli crisp", "Minced pork"],
-                steps: ["Mix sesame paste and chilli oil in bowl, combine with boiled noodles and spiced mince."]
+                ingredients: [
+                    "Wheat noodles, Chinese sesame paste, and Lao Gan Ma chilli crisp",
+                    "Spiced minced pork",
+                    "Chinkiang vinegar and soy sauce"
+                ],
+                steps: [
+                    "<strong>Sauce Base:</strong> Mix sesame paste, Lao Gan Ma chilli crisp, soy sauce, and Chinkiang vinegar in your serving bowl.",
+                    "<strong>Boil Noodles:</strong> Boil wheat noodles until chewy, then add directly to the sauce bowl.",
+                    "<strong>Minced Pork:</strong> Wok-fry minced pork with soy and Sichuan pepper until crispy.",
+                    "<strong>Assembly:</strong> Top noodles with the spiced minced pork and crushed peanuts."
+                ]
             },
             nasigoreng: {
                 title: "Nasi Goreng",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Jasmine rice, Kecap Manis, and sambal paste", "Fried egg topping"],
-                steps: ["Wok-fry rice with sweet soy and sambal, top with a fried egg."]
+                ingredients: [
+                    "Jasmine rice, Kecap Manis (sweet dark soy), and sambal chilli paste",
+                    "Garlic, shallots, and a fried egg topping"
+                ],
+                steps: [
+                    "<strong>Aromatics:</strong> Sauté garlic and shallots with sambal chilli paste in hot oil.",
+                    "<strong>Rice Fried:</strong> Add cold Jasmine rice and stir-fry vigorously.",
+                    "<strong>Sweet Soy:</strong> Drizzle in Kecap Manis until the rice turns evenly caramel-brown.",
+                    "Top: Serve with a crispy-edged fried egg on top."
+                ]
             },
             firecrackernoodles: {
                 title: "Spicy Firecracker Noodles",
                 prep: "10 mins", cook: "8 mins",
-                ingredients: ["Thick egg noodles, Lee Kum Kee Toban Djan, garlic, and peppers"],
-                steps: ["Toss thick noodles with spicy bean paste, garlic, and peppers on max heat."]
+                ingredients: [
+                    "Thick egg noodles",
+                    "Lee Kum Kee Toban Djan, garlic, ginger, and red peppers",
+                    "Crushed Sichuan peppercorns"
+                ],
+                steps: [
+                    "<strong>Boil Noodles:</strong> Cook thick egg noodles until al dente, then drain.",
+                    "<strong>Paste Sauté:</strong> Sauté Toban Djan, garlic, ginger, and Sichuan pepper in hot oil.",
+                    "<strong>Toss Noodles:</strong> Add noodles and red peppers to the wok on maximum heat.",
+                    "<strong>Finish:</strong> Toss until the spicy bean sauce coats every strand."
+                ]
             },
             spiceboxhybrid: {
                 title: "Spice Box Rice Hybrid",
                 prep: "10 mins", cook: "10 mins",
-                ingredients: ["Egg fried rice mixed 50/50 with chips", "Peppers, onions, chillies, and spice salt + Ajinomoto MSG"],
-                steps: ["Toss rice and chips together in a roaring hot pan with spice salt and chillies."]
+                ingredients: [
+                    "Egg fried rice mixed 50/50 with oven chips",
+                    "Peppers, onions, chillies, and house spice salt + Ajinomoto MSG"
+                ],
+                steps: [
+                    "<strong>Prep Bases:</strong> Prepare your egg fried rice and crispy oven chips.",
+                    "<strong>Roaring Wok:</strong> Heat your flat pan on max for 5 minutes.",
+                    "<strong>High-Heat Toss:</strong> Toss rice, chips, peppers, onions, and chillies together.",
+                    "<strong>Season:</strong> Dust heavily with spice salt and MSG, tossing for 60 seconds."
+                ]
             }
         };
 
